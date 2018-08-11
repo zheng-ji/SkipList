@@ -1,4 +1,4 @@
-#include "skiplist.h"
+#include "SkipList.h"
 #include <iostream>
 using namespace std;
 

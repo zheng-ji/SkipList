@@ -1,14 +1,13 @@
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg) ![Build status](https://travis-ci.org/zheng-ji/skiplist.svg?branch=master)
-# dpool 
+# SkipList
 
-使用模板化实现调表，主要特性：
-- 使用简单。 
+使用模板实现的跳表：
 - 支撑增删改查
 - 支持各种类型，包括内建或者自定义的[数据结构](https://github.com/zheng-ji/skiplist/blob/master/complex_type_example.cpp)。
 
 ## 快速上手
 ```C++
-#include "skiplist.h"
+#include "SkipList.h"
 #include <iostream>
 using namespace std;
 
