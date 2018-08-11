@@ -2,10 +2,11 @@
 # SkipList
 
 使用模板实现的跳表：
+- 使用简单，只需要引入头文件 `SkipList.h`
 - 支撑增删改查
-- 支持各种类型，包括内建或者自定义的[数据结构](https://github.com/zheng-ji/skiplist/blob/master/complex_type_example.cpp)。
+- 支持各种类型: 包括内建类型, 自定义[数据结构](https://github.com/zheng-ji/skiplist/blob/master/complex_type_example.cpp)。
 
-## 快速上手
+## Quick Start
 ```C++
 #include "SkipList.h"
 #include <iostream>
