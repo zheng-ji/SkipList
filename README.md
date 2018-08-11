@@ -12,20 +12,16 @@
 #include <iostream>
 using namespace std;
 
-int main() {
+int main() 
+{
     SkipList<int> sl;
-    sl.Print();
-
     sl.Insert(3);
     sl.Insert(1);
-    sl.Insert(0);
 
-    if (sl.Contains(s1)) 
-    {
+    if (sl.Contains(s1)) {
         cout << "3 in list" << endl;
     }
     sl.Print();
-
     sl.Erase(s1);
     sl.Print();
 
