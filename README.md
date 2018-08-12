@@ -10,23 +10,29 @@
 ```C++
 #include "SkipList.h"
 #include <iostream>
+#include <string>
 using namespace std;
 
 int main() 
 {
-    SkipList<int> sl;
-    sl.Insert(3);
-    sl.Insert(1);
+    SkipList<string> sl;
 
-    if (sl.Contains(s1)) {
-        cout << "3 in list" << endl;
+    sl.Insert("hello");
+    sl.Insert("world");
+    sl.Insert("ok");
+    sl.Insert("good");
+
+    if (sl.Contains("world")) 
+    {
+        cout << "world in list" << endl;
     }
-    sl.Print();
-    sl.Erase(s1);
-    sl.Print();
 
-    if (!sl.Contains(s1))
-        cout << "3 has been deleted" << endl;
+    sl.Print();
+    sl.Erase("world");
+    sl.Print();
+    if (!sl.Contains("world"))
+        cout << "world has been deleted" << endl;
+
     return 0;
 }
 ```

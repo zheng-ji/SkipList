@@ -82,14 +82,14 @@ int SkipList<T>::random_level()
 template <class T>
 void SkipList<T>::Print() const 
 {
-    const SkipNode<T> *x = header->forward[0];
+    const SkipNode<T> *node = header->forward[0];
     cout << "{";
 
-    while (x != NULL) 
+    while (node != NULL) 
     {
-        cout << x->value;
-        x = x->forward[0];
-        if (x != NULL)
+        cout << node->value;
+        node = node->forward[0];
+        if (node != NULL)
             cout << ",";
     }
 
@@ -100,39 +100,39 @@ template <class T>
 bool SkipList<T>::Contains(const T& Search_val) const 
 {
     Comparator<T> compareTo;
-    const SkipNode<T> *x = header;
+    const SkipNode<T> *node = header;
     for (int i = level; i >= 0; --i) 
     {
-        while (x->forward[i] != NULL && compareTo(x->forward[i]->value, Search_val)) 
+        while (node->forward[i] != NULL && compareTo(node->forward[i]->value, Search_val)) 
         {
-            x = x->forward[i];
+            node = node->forward[i];
         }
     }
 
-    x = x->forward[0];
-    return x != NULL && x->value == Search_val;
+    node = node->forward[0];
+    return node != NULL && node->value == Search_val;
 }
 
 template <class T>
 void SkipList<T>::Insert(const T &value) 
 {
-    SkipNode<T> *x = header;
+    SkipNode<T> *node = header;
     SkipNode<T> *update[MAX_LEVEL + 1];
     memset(update, 0, sizeof(SkipNode<T>*) * (MAX_LEVEL + 1));
     Comparator<T> compareTo;
 
     for (int i = level; i >= 0; --i) 
     {
-        while (x->forward[i] != NULL && compareTo(x->forward[i]->value, value)) 
+        while (node->forward[i] != NULL && compareTo(node->forward[i]->value, value)) 
         {
-            x = x->forward[i];
+            node = node->forward[i];
         }
-        update[i] = x;
+        update[i] = node;
     }
 
-    x = x->forward[0];
+    node = node->forward[0];
 
-    if (x == NULL || x->value != value) 
+    if (node == NULL || node->value != value) 
     {
         int lvl = random_level();
         if (lvl > level) 
@@ -144,12 +144,12 @@ void SkipList<T>::Insert(const T &value)
         }
         level = lvl;
 
-        x = new SkipNode<T>(lvl, value);
+        node = new SkipNode<T>(lvl, value);
         
         for (int i = 0; i <= lvl; ++i) 
         {
-            x->forward[i] = update[i]->forward[i];
-            update[i]->forward[i] = x;
+            node->forward[i] = update[i]->forward[i];
+            update[i]->forward[i] = node;
         }
     }
 }
@@ -157,32 +157,32 @@ void SkipList<T>::Insert(const T &value)
 template <class T>
 void SkipList<T>::Erase(const T &value) 
 {
-    SkipNode<T> *x = header;
+    SkipNode<T> *node = header;
     SkipNode<T> *update[MAX_LEVEL + 1];
     memset(update, 0, sizeof(SkipNode<T>*) * (MAX_LEVEL + 1));
     Comparator<T> compareTo;
 
     for (int i = level; i >= 0; --i) 
     {
-        while (x->forward[i] != NULL && compareTo(x->forward[i]->value, value)) 
+        while (node->forward[i] != NULL && compareTo(node->forward[i]->value, value)) 
         {
-            x = x->forward[i];
+            node = node->forward[i];
         }
-        update[i] = x;
+        update[i] = node;
     }
 
-    x = x->forward[0];
+    node = node->forward[0];
 
-    if (x->value == value) 
+    if (node->value == value) 
     {
         for (int i = 0; i <= level; i++) 
         {
-            if (update[i]->forward[i] != x) 
+            if (update[i]->forward[i] != node) 
                 break;
-            update[i]->forward[i] = x->forward[i];
+            update[i]->forward[i] = node->forward[i];
         }
 
-        delete x;
+        delete node;
 
         while (level > 0 && header->forward[level] == NULL)
             level --;
