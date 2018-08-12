@@ -9,8 +9,6 @@
 
 using namespace std;
 
-#define MAX_LEVEL 100 
-
 template <class T>
 class SkipNode 
 {
@@ -39,10 +37,11 @@ class SkipList
 {
     public:
 
-        SkipList() 
+        SkipList(int max_level) 
         {
-            header = new SkipNode<T>(MAX_LEVEL, T());
+            header = new SkipNode<T>(max_level, T());
             level = 0;
+            m_max_level = max_level;
         }
 
         ~SkipList()
@@ -58,6 +57,7 @@ class SkipList
     private:
         SkipNode<T> *header;
         int level;
+        int m_max_level;
 
         int random_level();
 };
@@ -76,7 +76,7 @@ template <class T>
 int SkipList<T>::random_level() 
 {
     int lvl = rand() / RAND_MAX;
-    return lvl < MAX_LEVEL ? lvl : MAX_LEVEL;
+    return lvl < m_max_level ? lvl : m_max_level;
 }
 
 template <class T>
@@ -117,8 +117,8 @@ template <class T>
 void SkipList<T>::Insert(const T &value) 
 {
     SkipNode<T> *node = header;
-    SkipNode<T> *update[MAX_LEVEL + 1];
-    memset(update, 0, sizeof(SkipNode<T>*) * (MAX_LEVEL + 1));
+    SkipNode<T> *update[m_max_level + 1];
+    memset(update, 0, sizeof(SkipNode<T>*) * (m_max_level + 1));
     Comparator<T> compareTo;
 
     for (int i = level; i >= 0; --i) 
@@ -158,8 +158,8 @@ template <class T>
 void SkipList<T>::Erase(const T &value) 
 {
     SkipNode<T> *node = header;
-    SkipNode<T> *update[MAX_LEVEL + 1];
-    memset(update, 0, sizeof(SkipNode<T>*) * (MAX_LEVEL + 1));
+    SkipNode<T> *update[m_max_level + 1];
+    memset(update, 0, sizeof(SkipNode<T>*) * (m_max_level + 1));
     Comparator<T> compareTo;
 
     for (int i = level; i >= 0; --i) 

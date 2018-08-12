@@ -6,7 +6,8 @@ using namespace std;
 
 int main() 
 {
-    SkipList<string> sl;
+    int max_level = 10;
+    SkipList<string> sl(max_level);
 
     sl.Insert("hello");
     sl.Insert("world");
