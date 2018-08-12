@@ -1,4 +1,4 @@
-![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg) ![Build status](https://travis-ci.org/zheng-ji/SkipList.svg?branch=master)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 # SkipList
 
 使用模板实现的跳表：

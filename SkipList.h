@@ -29,12 +29,14 @@ class SkipNode
         }
 
     public:
+
         T value;
         SkipNode<T> **forward;
 };
 
 template <class T>
-class SkipList {
+class SkipList 
+{
     public:
 
         SkipList() 
@@ -56,6 +58,8 @@ class SkipList {
     private:
         SkipNode<T> *header;
         int level;
+
+        int random_level();
 };
 
 template<class T>
@@ -68,7 +72,8 @@ class Comparator : public std::binary_function<T, T, bool>
         }
 };
 
-int random_level() 
+template <class T>
+int SkipList<T>::random_level() 
 {
     int lvl = rand() / RAND_MAX;
     return lvl < MAX_LEVEL ? lvl : MAX_LEVEL;
@@ -172,13 +177,14 @@ void SkipList<T>::Erase(const T &value)
     {
         for (int i = 0; i <= level; i++) 
         {
-            if (update[i]->forward[i] != x) break;
+            if (update[i]->forward[i] != x) 
+                break;
             update[i]->forward[i] = x->forward[i];
         }
 
         delete x;
 
-        while(level > 0 && header->forward[level] == NULL)
+        while (level > 0 && header->forward[level] == NULL)
             level --;
     }
 }
