@@ -7,8 +7,6 @@
 #include <cstring>
 #include <functional>
 
-using namespace std;
-
 template <class T>
 class SkipNode 
 {
@@ -83,17 +81,17 @@ template <class T>
 void SkipList<T>::Print() const 
 {
     const SkipNode<T> *node = header->forward[0];
-    cout << "{";
+    std::cout << "{";
 
     while (node != NULL) 
     {
-        cout << node->value;
+        std::cout << node->value;
         node = node->forward[0];
         if (node != NULL)
-            cout << ",";
+            std::cout << ",";
     }
 
-    cout << "}" << endl;
+    std::cout << "}" << std::endl;
 }
 
 template <class T>
